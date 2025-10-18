@@ -1,0 +1,14 @@
+services:
+  svr_n8n:
+    image: n8nio/n8n
+    container_name: n8n_container
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
+      - N8N_EDITOR_BASE_URL=${EXTERNAL_IP}
+      - WEBHOOK_URL=${EXTERNAL_IP}
+      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
+    ports:
+      - "80:5678"
+    volumes:
+      - /root/n8n_data:/home/node/.n8n
