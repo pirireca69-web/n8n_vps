@@ -1,6 +1,6 @@
 cd ~
 rm -f compose.cloudflare.yaml
-cat > compose.cloudflare.yaml <<'YAML'
+cat <<'YAML' > compose.cloudflare.yaml
 services:
   n8n:
     environment:
