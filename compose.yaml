@@ -1,16 +1,16 @@
+cd ~
+rm -f compose.cloudflare.yaml
+cat > compose.cloudflare.yaml <<'YAML'
 services:
   n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n_container
     environment:
-      - N8N_SECURE_COOKIE=false
-      - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
-      - N8N_EDITOR_BASE_URL=${EXTERNAL_IP}
-      - WEBHOOK_URL=${EXTERNAL_IP}
-      - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
-      - TZ=Europe/Lisbon
-    ports:
-      - "80:5678"
-    volumes:
-      - /root/n8n_data:/home/node/.n8n
+      - PUBLIC_BASE_URL=https://${HOSTNAME_PUBLICO}
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run --protocol http2 --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - n8n
     restart: unless-stopped
+YAML
