@@ -5,8 +5,8 @@ services:
     environment:
       - N8N_SECURE_COOKIE=false
       - N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true
-      - N8N_EDITOR_BASE_URL=http://n8n.demon8n123.work
-      - WEBHOOK_URL=http://n8n.demon8n123.work
+      - N8N_EDITOR_BASE_URL=${EXTERNAL_IP}
+      - WEBHOOK_URL=${EXTERNAL_IP}
       - N8N_DEFAULT_BINARY_DATA_MODE=filesystem
       - TZ=Europe/Lisbon
     ports:
