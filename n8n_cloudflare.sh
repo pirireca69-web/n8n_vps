@@ -37,7 +37,7 @@ services:
     container_name: cloudflared
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     depends_on:
-      - svr_n8n
+      - n8n
     restart: unless-stopped
 YAML
 
